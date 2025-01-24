@@ -1,0 +1,5 @@
+root = "."  
+tmp_dir = "tmp"  
+include_ext = ["go"]
+exclude_dir = ["tmp"]
+cmd = "go run src/main.go"
