@@ -21,6 +21,15 @@ func CreateDatabaseIfNotExist(db *sql.DB) {
 	}
 }
 
+func DropDatabaseIfExists(db *sql.DB) {
+	_, err := db.Exec("DROP DATABASE IF EXISTS crud")
+	if err != nil {
+		log.Fatalf("Error dropping database: %v\n", err)
+	} else {
+		fmt.Println("Database 'crud' dropped successfully.")
+	}
+}
+
 func CreateUsersTable(db *sql.DB) error {
 	checkQuery := `
 		SELECT EXISTS (
@@ -55,5 +64,18 @@ func CreateUsersTable(db *sql.DB) error {
 	}
 
 	log.Println("Table 'users' created successfully.")
+	return nil
+}
+
+func DropUsersTable(db *sql.DB) error {
+	dropQuery := `
+		DROP TABLE IF EXISTS users;
+	`
+	_, err := db.Exec(dropQuery)
+	if err != nil {
+		log.Printf("Error dropping 'users' table: %v\n", err)
+		return err
+	}
+	log.Println("Table 'users' dropped successfully.")
 	return nil
 }

@@ -5,8 +5,12 @@ import (
 	"go-crud/src/database"
 )
 
-func RunMigrations(db *sql.DB) {
-	// run all migrations here
+func RunUpMigrations(db *sql.DB) {
 	database.CreateDatabaseIfNotExist(db)
 	database.CreateUsersTable(db)
+}
+
+func RunDownMigrations(db *sql.DB) {
+	database.DropDatabaseIfExists(db)
+	database.DropUsersTable(db)
 }

@@ -12,12 +12,21 @@ import (
 
 func main() {
 	var rootCmd = &cobra.Command{Use: "switch"}
-	var migrateCmd = &cobra.Command{
-		Use:   "migrate",
-		Short: "Apply the migration SQL queries",
+	var migrateUpCmd = &cobra.Command{
+		Use:   "migrate up",
+		Short: "Apply the migration up SQL queries",
 		Run: func(cmd *cobra.Command, args []string) {
 			db, _ := config.ConnectToPostgres()
-			migrations.RunMigrations(db)
+			migrations.RunUpMigrations(db)
+			fmt.Println("Migrations applied")
+		},
+	}
+	var migrateDownCmd = &cobra.Command{
+		Use:   "migrate down",
+		Short: "Apply the migration down SQL queries",
+		Run: func(cmd *cobra.Command, args []string) {
+			db, _ := config.ConnectToPostgres()
+			migrations.RunDownMigrations(db)
 			fmt.Println("Migrations applied")
 		},
 	}
@@ -28,7 +37,7 @@ func main() {
 			server.Server()
 		},
 	}
-	rootCmd.AddCommand(migrateCmd, serverCmd)
+	rootCmd.AddCommand(migrateUpCmd, migrateDownCmd, serverCmd)
 	rootCmd.Execute()
 	// todo implement up and down migration logic
 }
