@@ -13,21 +13,21 @@ import (
 func main() {
 	var rootCmd = &cobra.Command{Use: "switch"}
 	var migrateUpCmd = &cobra.Command{
-		Use:   "migrate up",
+		Use:   "migrateUp",
 		Short: "Apply the migration up SQL queries",
 		Run: func(cmd *cobra.Command, args []string) {
 			db, _ := config.ConnectToPostgres()
 			migrations.RunUpMigrations(db)
-			fmt.Println("Migrations applied")
+			fmt.Println("Up Migrations applied")
 		},
 	}
 	var migrateDownCmd = &cobra.Command{
-		Use:   "migrate down",
+		Use:   "migrateDown",
 		Short: "Apply the migration down SQL queries",
 		Run: func(cmd *cobra.Command, args []string) {
 			db, _ := config.ConnectToPostgres()
 			migrations.RunDownMigrations(db)
-			fmt.Println("Migrations applied")
+			fmt.Println("Down Migrations applied")
 		},
 	}
 	var serverCmd = &cobra.Command{

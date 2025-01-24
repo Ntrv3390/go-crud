@@ -10,6 +10,7 @@ func RunUpMigrations(db *sql.DB) {
 	database.CreateUsersTable(db)
 }
 
+// migrations down not working fix needed
 func RunDownMigrations(db *sql.DB) {
 	database.DropDatabaseIfExists(db)
 	database.DropUsersTable(db)
