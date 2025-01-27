@@ -24,7 +24,7 @@ func CreateDatabaseIfNotExist(db *sql.DB) {
 func DropDatabaseIfExists(db *sql.DB) {
 	_, err := db.Exec("DROP DATABASE IF EXISTS crud")
 	if err != nil {
-		log.Fatalf("Error dropping database: %v\n", err)
+		fmt.Println("Error dropping database: %v\n", err)
 	} else {
 		fmt.Println("Database 'crud' dropped successfully.")
 	}

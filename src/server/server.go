@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func Server() {
+func RunServer() {
 	routes.UserRoutes()
 	routes.SingleUserRoutes()
 	port := "5000"

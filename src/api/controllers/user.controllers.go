@@ -103,7 +103,6 @@ func PutUser(w http.ResponseWriter, r *http.Request) {
 	}
 	userIdInt, err := strconv.Atoi(userId)
 	userData.Id = userIdInt
-	fmt.Println(userData)
 	if err != nil {
 		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return

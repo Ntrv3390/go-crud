@@ -34,7 +34,7 @@ func main() {
 		Use:   "run",
 		Short: "Run the server",
 		Run: func(cmd *cobra.Command, args []string) {
-			server.Server()
+			server.RunServer()
 		},
 	}
 	rootCmd.AddCommand(migrateUpCmd, migrateDownCmd, serverCmd)
