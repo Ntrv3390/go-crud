@@ -7,7 +7,7 @@ import (
 	"go-crud/src/api/models"
 )
 
-func InsertUserHandler(db *sql.DB, name string, age int) error {
+func InsertUserQuery(db *sql.DB, name string, age int) error {
 	query := `
 		INSERT INTO users (name, age) VALUES ($1, $2)
 	`
@@ -18,7 +18,7 @@ func InsertUserHandler(db *sql.DB, name string, age int) error {
 	return err
 }
 
-func GetUsersHandler(db *sql.DB) ([]models.User, error) {
+func GetUsersQuery(db *sql.DB) ([]models.User, error) {
 	query := `
 		SELECT * FROM users ORDER BY id asc
 	`
@@ -42,7 +42,7 @@ func GetUsersHandler(db *sql.DB) ([]models.User, error) {
 	return users, nil
 }
 
-func GetUserHandler(db *sql.DB, id string) (*models.User, error) {
+func GetUserQuery(db *sql.DB, id string) (*models.User, error) {
 	query := `
 		SELECT id, name, age FROM users WHERE id = $1
 	`
@@ -61,7 +61,7 @@ func GetUserHandler(db *sql.DB, id string) (*models.User, error) {
 	return &user, nil
 }
 
-func PutUserHandler(db *sql.DB, id string, name string, age int) (*models.User, error) {
+func PutUserQuery(db *sql.DB, id string, name string, age int) (*models.User, error) {
 	selectQuery := `
 		SELECT name, age FROM users WHERE id = $1
 	`
@@ -93,7 +93,7 @@ func PutUserHandler(db *sql.DB, id string, name string, age int) (*models.User, 
 	return &updatedUser, nil
 }
 
-func DeleteUserHandler(db *sql.DB, id string) (*models.User, error) {
+func DeleteUserQuery(db *sql.DB, id string) (*models.User, error) {
 	var user models.User
 	query := `SELECT id, name, age FROM users WHERE id = $1`
 	err := db.QueryRow(query, id).Scan(&user.Id, &user.Name, &user.Age)

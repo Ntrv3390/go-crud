@@ -19,7 +19,7 @@ func GetUsersHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	users, err := database.GetUsersHandler(db)
+	users, err := database.GetUsersQuery(db)
 	if err != nil {
 		http.Error(w, "Unable to fetch users", http.StatusInternalServerError)
 		return
@@ -49,7 +49,7 @@ func PostUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	err = database.InsertUserHandler(db, newUser.Name, newUser.Age)
+	err = database.InsertUserQuery(db, newUser.Name, newUser.Age)
 	if err != nil {
 		http.Error(w, "Unable to insert user", http.StatusInternalServerError)
 		return
@@ -58,7 +58,7 @@ func PostUserHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(newUser)
 }
 
-func GetUser(w http.ResponseWriter, r *http.Request) {
+func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db, err := config.ConnectToPostgres()
 
@@ -73,7 +73,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := database.GetUserHandler(db, userId)
+	user, err := database.GetUserQuery(db, userId)
 	if err != nil {
 		http.Error(w, "Unable to fetch the user", http.StatusInternalServerError)
 		return
@@ -81,7 +81,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-func PutUser(w http.ResponseWriter, r *http.Request) {
+func PutUserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db, err := config.ConnectToPostgres()
 
@@ -103,12 +103,13 @@ func PutUser(w http.ResponseWriter, r *http.Request) {
 	}
 	userIdInt, err := strconv.Atoi(userId)
 	userData.Id = userIdInt
+	fmt.Println(userData)
 	if err != nil {
 		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
 	}
 
-	user, err := database.PutUserHandler(db, userId, userData.Name, userData.Age)
+	user, err := database.PutUserQuery(db, userId, userData.Name, userData.Age)
 	if err != nil {
 		http.Error(w, "Unable to update user.", http.StatusInternalServerError)
 		return
@@ -116,7 +117,7 @@ func PutUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-func DeleteUser(w http.ResponseWriter, r *http.Request) {
+func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db, err := config.ConnectToPostgres()
 
@@ -131,7 +132,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := database.DeleteUserHandler(db, userId)
+	user, err := database.DeleteUserQuery(db, userId)
 	if err != nil {
 		http.Error(w, "Unable to fetch the user", http.StatusInternalServerError)
 		return

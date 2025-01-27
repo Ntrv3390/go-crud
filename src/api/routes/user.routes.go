@@ -22,11 +22,11 @@ func SingleUserRoutes() {
 	http.HandleFunc("/api/user", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "GET":
-			controllers.GetUser(w, r)
+			controllers.GetUserHandler(w, r)
 		case "PUT":
-			controllers.PutUser(w, r)
+			controllers.PutUserHandler(w, r)
 		case "DELETE":
-			controllers.DeleteUser(w, r)
+			controllers.DeleteUserHandler(w, r)
 		default:
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
