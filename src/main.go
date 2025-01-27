@@ -39,5 +39,4 @@ func main() {
 	}
 	rootCmd.AddCommand(migrateUpCmd, migrateDownCmd, serverCmd)
 	rootCmd.Execute()
-	// todo implement up and down migration logic
 }
