@@ -54,7 +54,9 @@ func CreateUsersTable(db *sql.DB) error {
         CREATE TABLE IF NOT EXISTS users (
 			id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(100) NOT NULL UNIQUE,
-			age INT
+			age INT,
+			createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    		updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
         );
     `
 	_, err = db.Exec(createQuery)

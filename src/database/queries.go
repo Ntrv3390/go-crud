@@ -32,7 +32,7 @@ func GetUsersQuery(db *sql.DB) ([]models.User, error) {
 	users := []models.User{}
 	for rows.Next() {
 		var user models.User
-		err := rows.Scan(&user.Id, &user.Name, &user.Age)
+		err := rows.Scan(&user.Id, &user.Name, &user.Age, &user.CreatedAt, &user.UpdatedAt)
 		if err != nil {
 			log.Fatal("Error scanning user:", err)
 			return nil, err
@@ -78,13 +78,13 @@ func PutUserQuery(db *sql.DB, id string, name string, age int) (*models.User, er
 
 	updateQuery := `
 		UPDATE users
-		SET name = $2, age = $3
+		SET name = $2, age = $3, updatedAt = CURRENT_TIMESTAMP
 		WHERE id = $1
-		RETURNING id, name, age
+		RETURNING id, name, age, updatedAt
 	`
 
 	var updatedUser models.User
-	err = db.QueryRow(updateQuery, id, name, age).Scan(&updatedUser.Id, &updatedUser.Name, &updatedUser.Age)
+	err = db.QueryRow(updateQuery, id, name, age).Scan(&updatedUser.Id, &updatedUser.Name, &updatedUser.Age, &updatedUser.UpdatedAt)
 	if err != nil {
 		log.Printf("Error updating user: %v", err)
 		return nil, err
