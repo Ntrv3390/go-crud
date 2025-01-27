@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"go-crud/src/api/models"
 	"go-crud/src/config"
 	"go-crud/src/database"
@@ -63,7 +62,7 @@ func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := config.ConnectToPostgres()
 
 	if err != nil {
-		fmt.Println("Error connecting to the database")
+		http.Error(w, "Unable to connect to the database", http.StatusInternalServerError)
 		return
 	}
 
@@ -86,7 +85,7 @@ func PutUserHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := config.ConnectToPostgres()
 
 	if err != nil {
-		fmt.Println("Error connecting to the database")
+		http.Error(w, "Unable to connect to the database", http.StatusInternalServerError)
 		return
 	}
 
@@ -103,7 +102,6 @@ func PutUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	userIdInt, err := strconv.Atoi(userId)
 	userData.Id = userIdInt
-	fmt.Println(userData)
 	if err != nil {
 		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
@@ -122,7 +120,7 @@ func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := config.ConnectToPostgres()
 
 	if err != nil {
-		fmt.Println("Error connecting to the database")
+		http.Error(w, "Unable to connect to the database", http.StatusInternalServerError)
 		return
 	}
 
