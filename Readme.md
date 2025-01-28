@@ -2,12 +2,12 @@
 
 ## Prerequisites
 
-The project uses go language hence you need to install it. You can install golang from this url -> ==https://go.dev/doc/install==.
-In this project I have used postgreSQL for database. Based on your requirements you can use any of the database you're comfortable with and can remove the postgreSQL dependencies and add your database dependencies to it. If you want to continue using postgreSQL just install it from this url -> ==https://www.postgresql.org/download== and then read the below section.
+The project uses go language hence you need to install it. You can install golang from this url -> <mark>https://go.dev/doc/install</mark>.
+In this project I have used postgreSQL for database. Based on your requirements you can use any of the database you're comfortable with and can remove the postgreSQL dependencies and add your database dependencies to it. If you want to continue using postgreSQL just install it from this url -> <mark>https://www.postgresql.org/download</mark> and then read the below section.
 
 ### Setting up .env file
 
-Now that you have installed all the required files and modules, you have to make a ==.env== file and then copy the contents of ==.env.example== file to ==.env== file and change the enviroment variables value accordingly.
+Now that you have installed all the required files and modules, you have to make a <mark>.env</mark> file and then copy the contents of <mark>.env.example</mark> file to <mark>.env</mark> file and change the enviroment variables value accordingly.
 
 ### Running the code
 
@@ -19,6 +19,6 @@ At this point you have all the dependencies installed to run the project. Now th
 2) `go run src/main.go migrateDown` - This will run all the down migrations.
 3) `go run src/main.go run` - This will start the server.
 
-The starting point of the project is in ==src== folder named ==main.go==.
+The starting point of the project is in <mark>src</mark> folder named <mark>main.go</mark>.
 
 ## Enjoy playing with API's - make updates and hit a PULL Request to merge 🎉 
