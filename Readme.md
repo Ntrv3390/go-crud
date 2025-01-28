@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-The project uses go language hence you need to install it. You can install golang from this url -> <mark>(Install GoLang)[https://go.dev/doc/install]</mark>.
+The project uses go language hence you need to install it. You can install golang from this url -> <mark>[Install GoLang](https://go.dev/doc/install)</mark>.
 In this project I have used postgreSQL for database. Based on your requirements you can use any of the database you're comfortable with and can remove the postgreSQL dependencies and add your database dependencies to it. If you want to continue using postgreSQL just install it from this url -> <mark>[Install PostgrSQL](https://www.postgresql.org/download)</mark> and then read the below section.
 
 ### Setting up .env file
